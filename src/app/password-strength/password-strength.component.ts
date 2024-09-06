@@ -32,7 +32,7 @@ export class PasswordStrengthComponent {
 
     const hasLetter = /[a-zA-Z]/.test(password);
     const hasDigit = /\d/.test(password);
-    const hasSymbol = /[!@#$%^-_&*(),.?":{}|<>]/.test(password);
+    const hasSymbol = /[!@#$%^-_=&*(),.?":{}|<>]/.test(password);
 
     if (hasLetter && hasDigit && hasSymbol) {
       return ['green', 'green', 'green'];
