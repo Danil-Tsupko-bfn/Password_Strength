@@ -22,12 +22,10 @@ export class PasswordStrengthComponent {
   getStrengthClass(): string[] {
     const password = this.passwordControl.value || '';
 
-    // If password is empty, all indicators are gray
     if (password.length === 0) {
       return ['gray', 'gray', 'gray'];
     }
 
-    // If password length is less than 8, all indicators are red
     if (password.length < 8) {
       return ['red', 'red', 'red'];
     }
