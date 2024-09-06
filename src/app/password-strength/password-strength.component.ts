@@ -12,6 +12,12 @@ import { CommonModule } from '@angular/common';
 export class PasswordStrengthComponent {
   passwordControl = new FormControl('');
 
+   /**replaceable for password visibility control*/
+  showPassword = false; 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
   getStrengthClass(): string[] {
     const password = this.passwordControl.value || '';
 
@@ -25,7 +31,7 @@ export class PasswordStrengthComponent {
 
     const hasLetter = /[a-zA-Z]/.test(password);
     const hasDigit = /\d/.test(password);
-    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasSymbol = /[!@#$%-_^&*(),.?":{}|<>]/.test(password);
 
     const isSimple = (hasLetter ? 1 : 0) + (hasDigit ? 1 : 0) + (hasSymbol ? 1 : 0) === 1;
     const isMedium = (hasLetter && hasDigit) || (hasLetter && hasSymbol) || (hasDigit && hasSymbol);
@@ -52,3 +58,6 @@ export class PasswordStrengthComponent {
     return 'neutral';
   }
 }
+
+
+
