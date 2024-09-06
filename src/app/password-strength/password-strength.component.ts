@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 export class PasswordStrengthComponent {
   passwordControl = new FormControl('');
 
-  // Метод для визначення класів індикаторів
   getStrengthClass(): string[] {
     const password = this.passwordControl.value || '';
 
@@ -41,7 +40,6 @@ export class PasswordStrengthComponent {
     }
   }
 
-  // Метод для визначення класу контейнера тіні
   getStrengthContainerClass(): string {
     const classes = this.getStrengthClass();
     if (classes.includes('red')) {
