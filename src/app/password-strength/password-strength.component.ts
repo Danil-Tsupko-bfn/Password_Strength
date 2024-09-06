@@ -12,8 +12,9 @@ import { CommonModule } from '@angular/common';
 export class PasswordStrengthComponent {
   passwordControl = new FormControl('');
 
-   /**replaceable for password visibility control*/
-  showPassword = false; 
+  /**replaceable for password visibility control*/
+  showPassword = false;
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -21,28 +22,29 @@ export class PasswordStrengthComponent {
   getStrengthClass(): string[] {
     const password = this.passwordControl.value || '';
 
+    // If password is empty, all indicators are gray
     if (password.length === 0) {
       return ['gray', 'gray', 'gray'];
     }
 
+    // If password length is less than 8, all indicators are red
     if (password.length < 8) {
       return ['red', 'red', 'red'];
     }
 
     const hasLetter = /[a-zA-Z]/.test(password);
     const hasDigit = /\d/.test(password);
-    const hasSymbol = /[!@#$%-_^&*(),.?":{}|<>]/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    const isSimple = (hasLetter ? 1 : 0) + (hasDigit ? 1 : 0) + (hasSymbol ? 1 : 0) === 1;
-    const isMedium = (hasLetter && hasDigit) || (hasLetter && hasSymbol) || (hasDigit && hasSymbol);
-    const isStrong = hasLetter && hasDigit && hasSymbol;
-
-    if (isStrong) {
+    // Check password strength
+    if (hasLetter && hasDigit && hasSymbol) {
       return ['green', 'green', 'green'];
-    } else if (isMedium) {
+    } else if ((hasLetter && hasDigit) || (hasLetter && hasSymbol) || (hasDigit && hasSymbol)) {
       return ['yellow', 'yellow', 'gray'];
-    } else {
+    } else if (hasLetter || hasDigit) {
       return ['red', 'gray', 'gray'];
+    } else {
+      return ['gray', 'gray', 'gray'];
     }
   }
 
@@ -58,6 +60,3 @@ export class PasswordStrengthComponent {
     return 'neutral';
   }
 }
-
-
-
