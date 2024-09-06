@@ -34,7 +34,6 @@ export class PasswordStrengthComponent {
     const hasDigit = /\d/.test(password);
     const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    // Check password strength
     if (hasLetter && hasDigit && hasSymbol) {
       return ['green', 'green', 'green'];
     } else if ((hasLetter && hasDigit) || (hasLetter && hasSymbol) || (hasDigit && hasSymbol)) {
